@@ -114,10 +114,14 @@ static Camera* initCamera() {
     return c;
 }
 
+/* hunger singleton init before */
+__attribute__((constructor)) static void loadCameraInstance() {
+    instance = initCamera();
+}
+
 Camera* getCamera() {
     if (instance != NULL) return instance;
-    instance = initCamera();
-    return instance;
+    exit(1);
 }
 
 void cleanCamera(Camera *c) {
