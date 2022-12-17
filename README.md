@@ -1,5 +1,13 @@
-### 一个终端小游戏
+## BasGame
 
-名字暂时定为 Bas(build and shot)
+### 简介
+
+Bas 是一个很酷的 2D 横版射击 ConsoleGame，画面由 Ascii 字符组成。
+
+### 开发相关
 
 开发中。。。
+
+使用 C 开发
+
+详细的开发文档请查阅[Doc](doc/)
