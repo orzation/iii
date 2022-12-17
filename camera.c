@@ -32,7 +32,7 @@ struct camera {
     char *view;
 };
 
-/* hunger single instance */
+/* lazy single instance */
 static Camera* instance;
 
 /* system: get console char size */
@@ -85,7 +85,7 @@ static void projectMap2Content(const Camera *c, const Map *m) {
     const uint16_t rh = c->height - (PADDING[0] << 1) , rw = c->width - (PADDING[1] << 1),
         /* content size = border size - 2*/
         rch = rh - 2, rcw = rw - 2,
-        mh = m->height, mw = m->width, 
+        mh = getMapH(m), mw = getMapW(m),
         /* cross block position */
         py1 = y < 0 ? -y : 0, px1 = x < 0 ? -x : 0,
         py2 = MIN(mh, rch + y) - y, px2 = MIN(mw, rcw + x) - x;
@@ -94,11 +94,10 @@ static void projectMap2Content(const Camera *c, const Map *m) {
     /* init unreachable content char */
     memset(ct, NIL_CHAR, rch * rcw);
 
-    printf("%d %d\n", x, y);
     /* cut a map block */
     for (uint16_t i = py1; i < py2; ++ i)
         for (uint16_t j = px1; j < px2; ++ j)
-            ct[i][j] =  m->data[i+y][j+x];
+            ct[i][j] = getMapCh(m, i + y, j + x);
 
     /* draw view */
     for (uint16_t i = 0; i < rch; ++ i)
@@ -114,14 +113,9 @@ static Camera* initCamera() {
     return c;
 }
 
-/* hunger singleton init before */
-__attribute__((constructor)) static void loadCameraInstance() {
-    instance = initCamera();
-}
-
 Camera* getCamera() {
-    if (instance != NULL) return instance;
-    exit(1);
+    if (!instance) instance = initCamera();
+    return instance;
 }
 
 void cleanCamera(Camera *c) {

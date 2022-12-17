@@ -35,7 +35,7 @@ int getKey(){
 
 int main (int argc, char *argv[]) {
     FILE *f = fopen("./test.txt", "r");
-    const int h = 70, w = 140;
+    const int h = 60, w = 140;
     char **g = (char **)malloc(sizeof(char*) * h);
     for (int i = 0; i < h; i ++) g[i] = (char *)malloc(w);
 
