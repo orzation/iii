@@ -1,8 +1,8 @@
-## BasGame
+## iii
 
 ### 简介
 
-Bas 是一个很酷的 2D 横版射击 ConsoleGame，画面由 Ascii 字符组成。
+iii 是一个很酷的 2D 横版射击 ConsoleGame，画面由 Ascii 字符组成。
 
 ### 开发相关
 
